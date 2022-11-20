@@ -4,45 +4,45 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Snake and Ladder Simulation");
-
-            //UC1
-
+            const int FirstPosition = 0;
             int position = 0;
-            Console.WriteLine("Initial (start) position is:" + position);
-
-            //UC2
-
-            Random random = new Random();
-            int diceOutput = random.Next(1, 7);
-            Console.WriteLine("Dice Output is :" + diceOutput);
-
-            //UC3
-
-            position = diceOutput;
-            Console.WriteLine("Position :", position);
-            Random random2 = new Random();
-            Console.WriteLine("Checking for Options");
-            int option = random2.Next(1, 4);
-            switch (option)
+            int DiceRoll;
+            Console.WriteLine("First player is starting with position " + FirstPosition);
+            while (position < 100)
             {
-                case 1:
-                    Console.WriteLine("No Play");
-                    position = position;
-                    Console.WriteLine("Position :" + position);
-                    break;
-                case 2:
-                    Console.WriteLine("Ladder");
-                    position = diceOutput;
-                    Console.WriteLine("Position :" + position);
-                    break;
-                case 3:
-                    Console.WriteLine("Snake");
-                    position = diceOutput;
-                    Console.WriteLine("Position :" + position);
-                    break;
+                Random random = new Random();
+                DiceRoll = random.Next(1, 7);
+                Console.WriteLine("The number player got through dice is" + DiceRoll);
+                Random random2 = new Random();
+                int play = random2.Next(1, 4);
+                if (play == 1)
+                {
+                    Console.WriteLine("Player got no play");
+                    DiceRoll = 0;
+                    position = position + DiceRoll;
+                }
+                else if (play == 2)
+                {
+                    Console.WriteLine("Player got ladder");
+                    position = (position + DiceRoll);
+                }
+                else
+                {
+                    Console.WriteLine("Player got snake");
+                    position = (position - DiceRoll);
+                    if (position < 0)
+                    {
+                        position = FirstPosition;
+                    }
+                    if (position > 100)
+                    {
+                        position = position - DiceRoll;
+                    }
+                    Console.WriteLine("The Player position is: " + position);
+                }
+                Console.ReadLine();
             }
-            Console.ReadLine();
+
         }
     }
 }
